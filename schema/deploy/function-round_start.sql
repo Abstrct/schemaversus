@@ -55,14 +55,15 @@ BEGIN
 	UPDATE variable SET char_value='now'::timestamp WHERE name='ROUND_START_DATE';
     
 	PERFORM nextval('round_seq');
-	PERFORM SET_CHAR_VARIABLE('STATUS','Running');
 
 	-- prepare new stat records for relevant players	
 	FOR players IN SELECT * from player WHERE ID <> 0 AND not disabled LOOP
 		INSERT INTO player_round_stats(player_id, round_id) VALUES (players.id, (select last_value from round_seq));
 	END LOOP;
 	INSERT INTO round_stats(round_id) VALUES((SELECT last_value FROM round_seq));
+	
 
+	PERFORM SET_CHAR_VARIABLE('STATUS','Running');
 
     RETURN 't';
 END;
