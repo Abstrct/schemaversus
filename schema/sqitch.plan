@@ -93,3 +93,4 @@ table-queue 2015-06-16T18:15:26Z Abstract <Abstract@Abstrcts-MacBook-Pro.local> 
 indexes 2013-12-01T18:37:52Z Joshua McDougall <jmcdougall@bitcoinsultants.com> # Lazily applies all the indexes
 permissions 2013-12-01T18:38:22Z Joshua McDougall <jmcdougall@bitcoinsultants.com> # Lazily applies all the schema permissions
 
+data-maps 2015-06-16T19:11:55Z Abstrct <josh@schemaverse.com> # some default maps

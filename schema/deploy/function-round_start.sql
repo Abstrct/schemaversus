@@ -28,6 +28,8 @@ BEGIN
 
 
 	-- Disable old players, set all resources to zero
+	UPDATE players set balance=0, fuel_reserve=0;
+
 	
 	-- Enable new players, give them actual resources
 
