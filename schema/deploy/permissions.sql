@@ -90,6 +90,6 @@ GRANT SELECT ON trophy_case TO players;
 
 
 REVOKE ALL ON map FROM players;
-
+REVOKE ALL ON round_queue FROM players;
 
 COMMIT;

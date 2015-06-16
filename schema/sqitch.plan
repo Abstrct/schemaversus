@@ -91,3 +91,4 @@ indexes 2013-12-01T18:37:52Z Joshua McDougall <jmcdougall@bitcoinsultants.com> #
 permissions 2013-12-01T18:38:22Z Joshua McDougall <jmcdougall@bitcoinsultants.com> # Lazily applies all the schema permissions
 table-map 2015-06-15T19:28:08Z Abstract <Abstract@Abstrcts-MacBook-Pro.local> # stores planet maps
 function-round_start 2015-06-15T21:52:19Z Abstract <Abstract@Abstrcts-MacBook-Pro.local> # sets up a new round
+table-queue 2015-06-16T18:15:26Z Abstract <Abstract@Abstrcts-MacBook-Pro.local> # stores the next games

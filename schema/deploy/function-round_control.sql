@@ -17,7 +17,9 @@ BEGIN
 		RETURN 'f';
 	END IF;	
 
-	IF NOT GET_CHAR_VARIABLE('ROUND_START_DATE')::date <= 'today'::date - GET_CHAR_VARIABLE('ROUND_LENGTH')::interval THEN
+	IF 	(GET_CHAR_VARIABLE('STATUS') = 'Running')
+		AND (NOT GET_CHAR_VARIABLE('ROUND_START_DATE')::date <= 'today'::date - GET_CHAR_VARIABLE('ROUND_LENGTH')::interval)
+	THEN
 		RETURN 'f';
 	END IF;
 
@@ -99,8 +101,8 @@ BEGIN
 
 
 
-	PERFORM nextval('round_seq');
-
+	--PERFORM nextval('round_seq');
+	PERFORM SET_CHAR_VARIABLE('STATUS','Waiting');
 
     RETURN 't';
 END;

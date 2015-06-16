@@ -15,6 +15,7 @@ INSERT INTO variable VALUES
 	('MAX_SHIP_HEALTH','f',1000,'','This is the maximum health a ship can have'::TEXT,0),
 	('ROUND_START_DATE','f',0,'1986-03-27','The day the round started.'::TEXT,0),
 	('ROUND_LENGTH','f',0,'1 days','The length of time a round takes to complete'::TEXT,0),
+	('STATUS','f',0,'Waiting','The current game status'::TEXT,0),
 	('DEFENSE_EFFICIENCY', 'f', 50, '', 'Used to calculate attack with defense'::TEXT,0);
 
 COMMIT;
