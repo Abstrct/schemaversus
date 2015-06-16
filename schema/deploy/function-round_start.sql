@@ -36,7 +36,7 @@ BEGIN
 
 	
 	-- Enable new players, give them actual resources
-	UPDATE player set disabled='f', balance=10000, fuel_reserve=100000 where id = any (select players from round_queue where id = queue_id);
+	UPDATE player set disabled='f', balance=10000, fuel_reserve=100000 where id = any (select round_queue.players from round_queue where id = queue_id);
 
 	
 	-- Build the new map, assign start player positions
