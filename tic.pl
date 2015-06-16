@@ -19,7 +19,6 @@ my $db_username = "schemaverse";
 # Make the master database connection
 my $master_connection = DBI->connect("dbi:Pg:dbname=${db_name};host=localhost", $db_username);
 
-$master_connection->do('SELECT ROUND_CONTROL();');
 
 
 
@@ -30,6 +29,7 @@ while (($temp_status) = $status_check->fetchrow()) {
 
 	if ($temp_status eq 'Running')
 	{
+
 
 		# Move the rest of the ships in whatever direction they have specified
 my $sql = <<SQLSTATEMENT;
@@ -152,10 +152,14 @@ SQLSTATEMENT
 		
 		#Tic is increased to NEXTVAL
 		$master_connection->do("SELECT nextval('tic_seq')");	
+		
+		$master_connection->do('SELECT ROUND_CONTROL();');
+
+		
 	}
 }
 
 $master_connection->disconnect();
-sleep(10);
+sleep(3);
 
 }

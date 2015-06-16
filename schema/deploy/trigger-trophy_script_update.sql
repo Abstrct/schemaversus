@@ -64,6 +64,6 @@ CREATE TRIGGER trophy_script_update
   ON trophy
   FOR EACH ROW
   EXECUTE PROCEDURE trophy_script_update();
-ALTER TABLE trophy DISABLE TRIGGER trophy_script_update;
+ALTER TABLE trophy ENABLE TRIGGER trophy_script_update;
 
 COMMIT;
