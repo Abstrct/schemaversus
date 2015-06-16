@@ -12,8 +12,8 @@
 use DBI; 
  
 # Config Variables
-my $db_name 	= "schemaverse";
-my $db_username = "schemaversus";
+my $db_name 	= "schemaversus";
+my $db_username = "schemaverse";
 
 while (1){ 
 
