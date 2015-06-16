@@ -48,7 +48,7 @@ BEGIN
 			map.fuel, 
 			map.lcoation, 
 			map.location[0], 
-			map.location[1] 
+			map.location[1], 
 			case map.starting_player WHEN NOT NULL THEN (select player.id FROM player WHERE NOT disabled order by ID offset starting_player limit 1) ELSE NULL END	
 		FROM map WHERE map_id = (select round_queue.id FROM round_queue WHERE id=queue_id);
 	
