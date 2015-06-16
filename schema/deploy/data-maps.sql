@@ -13,14 +13,14 @@ INSERT INTO map VALUES
 --
 --
 
-	(1, 'Elephantopolis', POINT(10000,0), 10000000,7, 30, 1),
-	(1, 'Blowfish Meadows', POINT(-10000,0), 10000000,7, 30, 2),	
+	(1, 'Elephantopolis', 	POINT(10000,0), 500000000,2, 30, 0),
+	(1, 'Blowfish Meadows', POINT(-10000,0), 500000000,2, 30, 1),	
 
-	(1, 'Erelephant', POINT(0,20000), 	10000000,7, 30, NULL),	
-	(1, 'Erelephant', POINT(0,10000), 	10000000,7, 30, NULL),	
-	(1, 'Erelephant', POINT(0,0), 		10000000,7, 30, NULL),	
-	(1, 'Erelephant', POINT(0,-10000), 	10000000,7, 30, NULL),
-	(1, 'Erelephant', POINT(0,-20000), 	10000000,7, 30, NULL)
+	(1, 'Erelephant', POINT(0,20000), 	500000000,2, 30, NULL),	
+	(1, 'Erelephant', POINT(0,10000), 	500000000,2, 30, NULL),	
+	(1, 'Erelephant', POINT(0,0), 		500000000,2, 30, NULL),	
+	(1, 'Erelephant', POINT(0,-10000), 	500000000,2, 30, NULL),
+	(1, 'Erelephant', POINT(0,-20000), 	500000000,2, 30, NULL)
 
 -- End Map 1	
 	

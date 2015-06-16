@@ -3,7 +3,7 @@
 BEGIN;
 
 create table map (
-	map_id integer,
+	id integer,
 	name character varying,
 	location point,
 	fuel integer,

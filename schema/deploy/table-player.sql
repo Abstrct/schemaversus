@@ -14,6 +14,7 @@ CREATE TABLE player
   starting_fleet integer,
   symbol character(1),
   rgb character(6),
+  disabled boolean default 't',
   CONSTRAINT player_pkey PRIMARY KEY (id),
   CONSTRAINT player_username_key UNIQUE (username),
   CONSTRAINT unq_symbol UNIQUE (symbol, rgb),

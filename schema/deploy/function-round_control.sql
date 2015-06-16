@@ -18,7 +18,7 @@ BEGIN
 	END IF;	
 
 	IF 	(GET_CHAR_VARIABLE('STATUS') = 'Running')
-		AND (NOT GET_CHAR_VARIABLE('ROUND_START_DATE')::date <= 'today'::date - GET_CHAR_VARIABLE('ROUND_LENGTH')::interval)
+		AND (NOT GET_CHAR_VARIABLE('ROUND_START_DATE')::timestamp <= 'now'::timestamp - GET_CHAR_VARIABLE('ROUND_LENGTH')::interval)
 	THEN
 		RETURN 'f';
 	END IF;

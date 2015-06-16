@@ -4,7 +4,7 @@
 BEGIN;
 
 CREATE VIEW my_player AS 
-	SELECT id, username, created, balance, fuel_reserve, password, error_channel, starting_fleet, symbol, rgb
+	SELECT id, username, created, balance, fuel_reserve, password, error_channel, starting_fleet, symbol, rgb, disabled
 	 FROM player WHERE username=SESSION_USER;
 
 
