@@ -26,7 +26,7 @@ $master_connection->do('SELECT ROUND_CONTROL();');
 my $status_check = $master_connection->prepare("SELECT GET_CHAR_VARIABLE('STATUS');"); 
 $status_check->execute();
 $temp_status = '';
-while (($temp_status) = $rs->fetchrow()) {
+while (($temp_status) = $status_check->fetchrow()) {
 
 	if ($temp_status eq 'Running')
 	{
