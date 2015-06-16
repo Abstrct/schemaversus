@@ -18,7 +18,7 @@ BEGIN
 	END IF;	
 
 	IF 	(GET_CHAR_VARIABLE('STATUS') = 'Running')
-		AND (NOT GET_CHAR_VARIABLE('ROUND_START_DATE')::timestamp <= 'now'::timestamp - GET_CHAR_VARIABLE('ROUND_LENGTH')::interval)
+		AND (GET_CHAR_VARIABLE('ROUND_START_DATE')::timestamp + GET_CHAR_VARIABLE('ROUND_LENGTH')::interval > 'now'::timestamp )
 	THEN
 		RETURN 'f';
 	END IF;
@@ -98,7 +98,8 @@ BEGIN
     alter sequence ship_id_seq restart with 1;
     alter sequence tic_seq restart with 1;
 	alter sequence planet_id_seq restart with 1;
-
+	
+	
 
 
 	--PERFORM nextval('round_seq');

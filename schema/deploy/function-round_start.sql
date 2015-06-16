@@ -36,21 +36,22 @@ BEGIN
 
 	
 	-- Enable new players, give them actual resources
-	UPDATE player set disabled='f', balance=10000, fuel_reserve=100000 where id = any (select round_queue.players from round_queue where id = queue_id);
+	UPDATE player set disabled='f', balance=10000, fuel_reserve=100000 where id = any (select unnest(round_queue.players) from round_queue where round_queue.id = queue_id);
 
 	
 	-- Build the new map, assign start player positions
-	INSERT INTO planet (name, mine_limit, difficulty, fuel, location, location_x, location_y, conqueror_id) 
+	INSERT INTO planet (id, name, mine_limit, difficulty, fuel, location, location_x, location_y, conqueror_id) 
 		SELECT 
+			extval('planet_id_seq'),
 			map.name, 
 			map.mine_limit, 
 			map.difficulty, 
 			map.fuel, 
-			map.lcoation, 
+			map.location, 
 			map.location[0], 
 			map.location[1], 
-			case map.starting_player WHEN NOT NULL THEN (select player.id FROM player WHERE NOT disabled order by ID offset starting_player limit 1) ELSE NULL END	
-		FROM map WHERE map_id = (select round_queue.id FROM round_queue WHERE id=queue_id);
+			case map.starting_player WHEN NULL THEN NULL ELSE (select player.id FROM player WHERE NOT disabled order by ID offset starting_player limit 1)  END	
+		FROM map WHERE map.id = (select round_queue.id FROM round_queue WHERE id=queue_id);
 	
 	UPDATE variable SET char_value='now'::timestamp WHERE name='ROUND_START_DATE';
     
