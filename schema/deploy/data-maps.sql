@@ -24,7 +24,7 @@ INSERT INTO map VALUES
 
 -- End Map 1	
 	
-	;
-);
+	
+;
 
 COMMIT;
