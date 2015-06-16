@@ -2,7 +2,7 @@
 
 BEGIN;
 
-INSERT INTO maps VALUES 
+INSERT INTO map VALUES 
 
 -- Map 1
 --			X
