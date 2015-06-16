@@ -32,12 +32,12 @@ while (($temp_status) = $status_check->fetchrow()) {
 	{
 
 		# Move the rest of the ships in whatever direction they have specified
-		my $sql = <<SQLSTATEMENT;
-		BEGIN WORK;
-		LOCK TABLE ship, ship_control IN EXCLUSIVE MODE;
-		 SELECT MOVE_SHIPS();
-		COMMIT WORK;
-		SQLSTATEMENT
+my $sql = <<SQLSTATEMENT;
+BEGIN WORK;
+LOCK TABLE ship, ship_control IN EXCLUSIVE MODE;
+ SELECT MOVE_SHIPS();
+COMMIT WORK;
+SQLSTATEMENT
 		
 		$master_connection->do($sql); 
 		
@@ -49,23 +49,23 @@ while (($temp_status) = $status_check->fetchrow()) {
 		
 		
 		# Retreive Fleet Scripts and run them as the user they belong to
-		my $sql = <<SQLSTATEMENT;
-		SELECT 
-			player.id as player_id,
-			player.username as username,
-			fleet.id as fleet_id,
-			player.error_channel as error_channel
-		FROM 
-			fleet, player
-		WHERE
-			fleet.player_id=player.id
-			AND
-			fleet.enabled='t'
-			AND 
-			fleet.runtime > '0 minutes'::interval
-		ORDER BY 
-			player.username;
-		SQLSTATEMENT
+my $sql = <<SQLSTATEMENT;
+SELECT 
+	player.id as player_id,
+	player.username as username,
+	fleet.id as fleet_id,
+	player.error_channel as error_channel
+FROM 
+	fleet, player
+WHERE
+	fleet.player_id=player.id
+	AND
+	fleet.enabled='t'
+	AND 
+	fleet.runtime > '0 minutes'::interval
+ORDER BY 
+	player.username;
+SQLSTATEMENT
 		
 		my $fleet_fail_event = $master_connection->prepare("INSERT INTO event(tic,action,player_id_1,referencing_id,descriptor_string) VALUES ((SELECT last_value FROM tic_seq),'FLEET_FAIL',?,?,?)");
 		my $rs = $master_connection->prepare($sql); 
@@ -98,29 +98,29 @@ while (($temp_status) = $status_check->fetchrow()) {
 		}
 		$rs->finish;
 		
-		my $sql = <<SQLSTATEMENT;
-		BEGIN WORK;
-		LOCK TABLE ship, ship_control IN EXCLUSIVE MODE;
-		SELECT
-		        CASE
-		                WHEN ship_control.action = 'ATTACK' THEN ATTACK(ship.id, ship_control.action_target_id)::integer
-		                WHEN ship_control.action = 'REPAIR' THEN REPAIR(ship.id, ship_control.action_target_id)::integer
-		                WHEN ship_control.action = 'MINE' THEN MINE(ship.id, ship_control.action_target_id)::integer
-		                ELSE NULL END
-		FROM
-		        ship, ship_control
-		WHERE
-		         ship.id = ship_control.ship_id
-		        AND
-		        ship_control.action IS NOT NULL
-		        AND
-		        ship_control.action_target_id IS NOT NULL
-		        AND
-		        ship.destroyed='f'
-		        AND 
-		        ship.last_action_tic != (SELECT last_value FROM tic_seq);
-		COMMIT WORK;
-		SQLSTATEMENT
+my $sql = <<SQLSTATEMENT;
+BEGIN WORK;
+LOCK TABLE ship, ship_control IN EXCLUSIVE MODE;
+SELECT
+        CASE
+                WHEN ship_control.action = 'ATTACK' THEN ATTACK(ship.id, ship_control.action_target_id)::integer
+                WHEN ship_control.action = 'REPAIR' THEN REPAIR(ship.id, ship_control.action_target_id)::integer
+                WHEN ship_control.action = 'MINE' THEN MINE(ship.id, ship_control.action_target_id)::integer
+                ELSE NULL END
+FROM
+        ship, ship_control
+WHERE
+         ship.id = ship_control.ship_id
+        AND
+        ship_control.action IS NOT NULL
+        AND
+        ship_control.action_target_id IS NOT NULL
+        AND
+        ship.destroyed='f'
+        AND 
+        ship.last_action_tic != (SELECT last_value FROM tic_seq);
+COMMIT WORK;
+SQLSTATEMENT
 		$master_connection->do($sql);
 		
 		
