@@ -42,7 +42,7 @@ BEGIN
 	-- Build the new map, assign start player positions
 	INSERT INTO planet (id, name, mine_limit, difficulty, fuel, location, location_x, location_y, conqueror_id) 
 		SELECT 
-			extval('planet_id_seq'),
+			nextval('planet_id_seq'),
 			map.name, 
 			map.mine_limit, 
 			map.difficulty, 
@@ -50,10 +50,20 @@ BEGIN
 			map.location, 
 			map.location[0], 
 			map.location[1], 
-			case map.starting_player WHEN NULL THEN NULL ELSE (select player.id FROM player WHERE NOT disabled order by ID offset starting_player limit 1)  END	
+			case WHEN map.starting_player is NULL THEN NULL ELSE (select player.id FROM player WHERE NOT disabled order by ID offset starting_player limit 1)  END	
 		FROM map WHERE map.id = (select round_queue.id FROM round_queue WHERE id=queue_id);
 	
 	UPDATE variable SET char_value='now'::timestamp WHERE name='ROUND_START_DATE';
+	PERFORM SET_CHAR_VARIABLE('ROUND_LENGTH',(select timespan from round_queue where round_queue.id = queue_id)::character varying);
+
+	alter table event enable trigger all;
+	alter table planet enable trigger all;
+	alter table fleet enable trigger all;
+	alter table planet_miners enable trigger all;
+	alter table ship_flight_recorder enable trigger all;
+	alter table ship_control enable trigger all;
+	alter table ship enable trigger all;
+
     
 	PERFORM nextval('round_seq');
 
@@ -63,6 +73,7 @@ BEGIN
 	END LOOP;
 	INSERT INTO round_stats(round_id) VALUES((SELECT last_value FROM round_seq));
 	
+
 
 	PERFORM SET_CHAR_VARIABLE('STATUS','Running');
 

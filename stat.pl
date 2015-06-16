@@ -19,6 +19,14 @@ my $master_connection = DBI->connect("dbi:Pg:dbname=${db_name};host=localhost", 
 while (1){
 
 
+my $status_check = $master_connection->prepare("SELECT GET_CHAR_VARIABLE('STATUS');"); 
+$status_check->execute();
+$temp_status = '';
+while (($temp_status) = $rs->fetchrow()) {
+
+	if ($temp_status eq 'Running')
+	{
+
         my $sql = "SELECT player_id, round_id FROM player_round_stats ORDER BY round_id DESC, last_updated ASC LIMIT 1;";
 
         my $rs = $master_connection->prepare($sql);
@@ -65,5 +73,7 @@ SQLSTATEMENT
         $rs->finish;
 
         #sleep(5);
+       }
+   }
 }
 $master_connection->disconnect();
