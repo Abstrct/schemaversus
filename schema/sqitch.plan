@@ -87,8 +87,9 @@ table-player_overall_stats 2013-12-01T18:28:35Z Joshua McDougall <jmcdougall@bit
 view-current_round_stats 2013-12-01T18:30:02Z Joshua McDougall <jmcdougall@bitcoinsultants.com> # Stores the full stats current in the round
 table-round_stats 2013-12-01T18:33:48Z Joshua McDougall <jmcdougall@bitcoinsultants.com> # Stores the current stats of the round
 function-round_control 2013-12-01T18:35:25Z Joshua McDougall <jmcdougall@bitcoinsultants.com> # Handles the round completion and new game setup
-indexes 2013-12-01T18:37:52Z Joshua McDougall <jmcdougall@bitcoinsultants.com> # Lazily applies all the indexes
-permissions 2013-12-01T18:38:22Z Joshua McDougall <jmcdougall@bitcoinsultants.com> # Lazily applies all the schema permissions
 table-map 2015-06-15T19:28:08Z Abstract <Abstract@Abstrcts-MacBook-Pro.local> # stores planet maps
 function-round_start 2015-06-15T21:52:19Z Abstract <Abstract@Abstrcts-MacBook-Pro.local> # sets up a new round
 table-queue 2015-06-16T18:15:26Z Abstract <Abstract@Abstrcts-MacBook-Pro.local> # stores the next games
+indexes 2013-12-01T18:37:52Z Joshua McDougall <jmcdougall@bitcoinsultants.com> # Lazily applies all the indexes
+permissions 2013-12-01T18:38:22Z Joshua McDougall <jmcdougall@bitcoinsultants.com> # Lazily applies all the schema permissions
+
