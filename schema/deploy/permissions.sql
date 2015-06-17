@@ -34,6 +34,7 @@ GRANT SELECT ON my_ships TO players;
 GRANT INSERT ON my_ships TO players;
 GRANT SELECT ON ships_in_range TO players;
 GRANT SELECT ON my_ships_flight_recorder TO players;
+GRANT DELETE ON my_ships to players;
 
 REVOKE ALL ON ship FROM players;
 REVOKE ALL ON ship_id_seq FROM players;
@@ -91,5 +92,8 @@ GRANT SELECT ON trophy_case TO players;
 
 REVOKE ALL ON map FROM players;
 REVOKE ALL ON round_queue FROM players;
+
+GRANT SELECT ON planets_in_range TO players;
+
 
 COMMIT;

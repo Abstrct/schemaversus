@@ -51,7 +51,7 @@ BEGIN
 			map.location[0], 
 			map.location[1], 
 			case WHEN map.starting_player is NULL THEN NULL ELSE (select player.id FROM player WHERE NOT disabled order by ID offset starting_player limit 1)  END	
-		FROM map WHERE map.id = (select round_queue.id FROM round_queue WHERE id=queue_id);
+		FROM map WHERE map.id = (select round_queue.map_id FROM round_queue WHERE id=queue_id);
 	
 	UPDATE variable SET char_value='now'::timestamp WHERE name='ROUND_START_DATE';
 	PERFORM SET_CHAR_VARIABLE('ROUND_LENGTH',(select timespan from round_queue where round_queue.id = queue_id)::character varying);
@@ -76,6 +76,9 @@ BEGIN
 
 
 	PERFORM SET_CHAR_VARIABLE('STATUS','Running');
+
+
+   	UPDATE fleet SET runtime='1 minute', enabled='t' FROM player WHERE player.starting_fleet=fleet.id AND player.id=fleet.player_id AND NOT player.disabled;
 
     RETURN 't';
 END;

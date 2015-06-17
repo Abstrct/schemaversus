@@ -44,6 +44,7 @@ FOR players IN
 	WHERE 
 		player.id=prs.player_id AND 
 		prs.player_damage > rs.avg_damage 
+		and not player.disabled
 
 LOOP
 		winner.round  := _round_id; 

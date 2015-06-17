@@ -34,6 +34,7 @@ CREATE OR REPLACE RULE ship_delete AS
   WHERE ship.id = old.id AND ship.player_id = get_player_id("session_user"());
 
 
+
 CREATE OR REPLACE RULE ship_insert AS
     ON INSERT TO my_ships DO INSTEAD  INSERT INTO ship (name, range, attack, defense, engineering, prospecting, location_x, location_y, location, last_living_tic, fleet_id) 
   VALUES (new.name, COALESCE(new.range, 300), COALESCE(new.attack, 5), COALESCE(new.defense, 5), COALESCE(new.engineering, 5), COALESCE(new.prospecting, 5), COALESCE(new.location_x::double precision, new.location[0]), 

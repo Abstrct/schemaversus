@@ -42,6 +42,8 @@ FOR players IN
 	WHERE 
 		player.id=prs.player_id AND 
 		prs.player_ships < rs.avg_ships
+		and not player.disabled
+
 
 LOOP
 		winner.round  := _round_id; 

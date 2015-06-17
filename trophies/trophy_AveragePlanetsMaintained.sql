@@ -44,6 +44,8 @@ FOR players IN
 	WHERE 
 		player.id=prs.player_id AND 
 		prs.player_planets > rs.avg_planets 
+		and not player.disabled
+
 
 LOOP
 		winner.round  := _round_id; 
