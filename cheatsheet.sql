@@ -11,11 +11,11 @@ INSERT INTO my_ships(name) SELECT 'Home Mining' FROM generate_series(0,10);
 SELECT * FROM planets WHERE conqueror_id = GET_PLAYER_ID(SESSION_USER);
 
 -- OK, mine that planet automatically by updating the state of those ships: 
--- UPDATE my_ships SET action='MINE', action_target_id=<write in that planet id> WHERE name 'Home Mining';
+-- UPDATE my_ships SET action='MINE', action_target_id=1 WHERE name = 'Home Mining';
 
 
 -- Or, a slightly fancier way that includes the planet ID automatically 
-UPDATE my_ships SET action='MINE', action_target_id=planets.id FROM planets WHERE planets.conqueror_id = GET_PLAYER_ID(SESSION_USER) AND my_ships.name 'Home Mining';
+UPDATE my_ships SET action='MINE', action_target_id=planets.id FROM planets WHERE planets.conqueror_id = GET_PLAYER_ID(SESSION_USER) AND my_ships.name = 'Home Mining';
 
 -- Now that your sweet sweet resoruces are rolling in, lets convert the fuel to cash so we can build more
 SELECT convert_resource('FUEL', fuel_reserve/2) FROM my_ships;
@@ -76,7 +76,7 @@ UPDATE my_ships
 	SET 
 		-- MOVE THIS WAY
 		destination=POINT(0,0), 
-		target_speed=max_speed,		
+		target_speed=max_speed	
 	WHERE name = 'Explorer';
 
 
