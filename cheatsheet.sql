@@ -3,6 +3,10 @@
 -- Scheaverse.com 
 -- https://github.com/Abstrct/schemaversus
 
+-- View your player stats
+SELECT * FROM my_player;
+
+
 -- Create some ships on your home planet to mine some resources
 INSERT INTO my_ships(name) SELECT 'Home Mining' FROM generate_series(0,10);
 
@@ -22,7 +26,7 @@ SELECT convert_resource('FUEL', fuel_reserve/2) FROM my_player;
 
 
 -- Let's upgrade those ships to mine harder 
-SELECT UPGRADE(id, 'PROSPECTING', 100) FROM my_ships WHERE name = 'Home Mining';
+SELECT UPGRADE(id, 'PROSPECTING', 450) FROM my_ships WHERE name = 'Home Mining';
 
 
 -- If you find you are out of funds, make sure you convert some fuel over to money again. You likely have lots of fuel!
@@ -64,8 +68,8 @@ UPDATE my_ships
 
 -- Thats probably going slow though! So upgrade that a bit too
 SELECT 
-	UPGRADE(id, 'MAX_SPEED', 500),
-	UPGRADE(id, 'MAX_FUEL', 1300)
+	UPGRADE(id, 'MAX_SPEED',1000),
+	UPGRADE(id, 'MAX_FUEL', 2300)
 FROM my_ships
 WHERE name = 'Explorer';
 
