@@ -18,7 +18,7 @@ SELECT * FROM planets WHERE conqueror_id = GET_PLAYER_ID(SESSION_USER);
 UPDATE my_ships SET action='MINE', action_target_id=planets.id FROM planets WHERE planets.conqueror_id = GET_PLAYER_ID(SESSION_USER) AND my_ships.name = 'Home Mining';
 
 -- Now that your sweet sweet resoruces are rolling in, lets convert the fuel to cash so we can build more
-SELECT convert_resource('FUEL', fuel_reserve/2) FROM my_ships;
+SELECT convert_resource('FUEL', fuel_reserve/2) FROM my_player;
 
 
 -- Let's upgrade those ships to mine harder 
